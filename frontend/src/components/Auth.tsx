@@ -34,13 +34,14 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             <div className="text-slate-500">
               {type === "signin"
                 ? "Don't have an account?"
-                : "Already have an account?"}
+                : "Already have an account?"} 
               <Link
                 className="pl-2 underline"
                 to={type === "signin" ? "/signup" : "/signin"}
               >
                 {type === "signin" ? "Sign up" : "Sign in"}
               </Link>
+
             </div>
           </div>
           <div className="pt-2">
@@ -86,12 +87,7 @@ interface LabelledInputType {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 }
-function LabelledInput({
-  label,
-  placeholder,
-  onChange,
-  type,
-}: LabelledInputType) {
+function LabelledInput({ label, placeholder, onChange, type }: LabelledInputType) {
   return (
     <div>
       <label className="block mb-2 text-sm text-black font-semibold ">
@@ -102,7 +98,7 @@ function LabelledInput({
         onChange={onChange}
         type={type || "text"}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 font-[cursive]"
         placeholder={placeholder}
         required
       />

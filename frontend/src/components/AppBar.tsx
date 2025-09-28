@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export const Appbar = () => {
   return (
-    <div className="border-b flex justify-between px-10 py-2">
+    <div className="border-b flex justify-between px-10 py-2 bg-emerald-600">
       <Link to={"/"}
-        className="flex flex-col direction-col justify-center cursor-pointer">
+        className="flex flex-col direction-col justify-center cursor-pointer font-[cursive]">
         Medium
       </Link>
       <div>
@@ -17,5 +17,8 @@ export const Appbar = () => {
         <Avatar size={"big"} name="Mayank" />
       </div>
     </div>
-  );
+  ); 
+  
+   
 };
+// fixed top-0 left-0 w-full text-white p-4 z-50 bg-emerald-600v 

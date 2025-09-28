@@ -5,7 +5,7 @@ interface BlogCardprops {
     title: string;
     content: string;
     publishedDate: string;
-    id: string;
+    id: string; 
 }
 
 export const BlogCard = ({id, authorName, title, content, publishedDate}: BlogCardprops) => {
