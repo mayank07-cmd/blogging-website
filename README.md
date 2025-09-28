@@ -30,5 +30,3 @@ A **full-stack blog application** where users can create, read, and view blogs. 
 - 🔑 JWT Authentication
 
  ---
-
---
