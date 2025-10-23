@@ -1,6 +1,6 @@
 # 📝 Blog Clone Website  
 
-A **full-stack blog application** where users can create, read, and view blogs. Built with **React (frontend)** and **Hono + Prisma + PostgreSQL (backend)**, deployed on **Cloudflare Workers with Prisma Accelerate**.  
+A **full-stack blog application** where users can create, read, and view blogs. Built with **React (frontend)** and **Hono(backend) + Prisma + PostgreSQL **, deployed on **Cloudflare Workers with Prisma Accelerate**.  
 
 ---
 
