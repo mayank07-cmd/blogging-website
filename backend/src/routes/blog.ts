@@ -5,7 +5,7 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { createBlogInput, updateBlogInput } from "@mayankbisht/medium-common"
 
 type JwtPayload = {
-  id: string
+  id: number
 };
 
 export const blogRouter = new Hono<{
@@ -14,7 +14,7 @@ export const blogRouter = new Hono<{
     JWT_SECRET  : string
 	},
     Variables: {
-        userId  : string
+        userId  : number
     }
 }>();
 
@@ -44,7 +44,7 @@ blogRouter.post('/', async (c) => {
             message: "Inputs not correct"
         })
     }
-    const authorId = c.get("userId");
+    const authorId = Number(c.get("userId"));
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
@@ -104,7 +104,7 @@ blogRouter.get('/bulk', async (c) => {
 })
 
 blogRouter.get('/:id', async (c) => {
-    const id = c.req.param("id");
+    const id = Number(c.req.param("id"));
     const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())

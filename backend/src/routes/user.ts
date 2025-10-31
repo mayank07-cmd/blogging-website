@@ -12,26 +12,42 @@ export const userRouter = new Hono<{
 }>();
 
 userRouter.post('/signup', async (c) => {
-  const body = await c.req.json();
-  const parsed = signupInput.safeParse(body)
-
-  if (!parsed.success) {
-    c.status(400)
-    return c.json({ message: "Inputs not correct", error: parsed.error.format() })
-  }
-    const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate())
-
-  const user = await prisma.user.create({
-    data: {
-      email   : body.email,
-      password: body.password,
+  try {
+    const body = await c.req.json();
+    const parsed = signupInput.safeParse(body);
+    if (!parsed.success) {
+      c.status(400);
+      return c.json({ message: "Inputs not correct", error: parsed.error.format() });
     }
-  })
-  const token = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ jwt: token })
-})
+
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    const existingUser = await prisma.user.findUnique({
+      where: { email: body.email }
+    });
+
+    if (existingUser) {
+      c.status(400);
+      return c.json({ message: "User already exists" });
+    }
+
+    const user = await prisma.user.create({
+      data: {
+        email: body.email,
+        password: body.password,
+      },
+    });
+
+    const token = await sign({ id: user.id }, c.env.JWT_SECRET);
+    return c.json({ jwt: token });
+  } catch (e: any) {
+    c.status(500);
+    return c.json({ message: "Internal server error", error: e.message });
+  }
+});
+
 
 userRouter.post('/signin', async (c) => {
   const body = await c.req.json();
