@@ -19,7 +19,7 @@ export const Publish = () => {
           },
         }
       );
-      navigate(`/blog${response.data.id}`);
+      navigate(`/blog/${response.data.id}`);
 
       console.log("Blog published:", response.data);
       alert("Blog published successfully!");
